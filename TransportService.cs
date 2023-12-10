@@ -4,6 +4,7 @@ using System.ComponentModel.Design;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
@@ -50,9 +51,24 @@ namespace net
                     switch (user)
                     {
                         case 1:
-                            BookService();
+                            Uber uberService = new Uber();
+                            uberService.BookService();
                             break;
+                        case 2:
+                            Taxi taxiService = new Taxi();
+                            taxiService.BookService();
+                            break;
+                        case 3:
+                            Bus busService = new Bus();
+                            busService.BookService();
+                            break;
+                        case 4:
+                            Train trainService = new Train();
+                            trainService.BookService();
+                            break;
+
                     }
+                    
 
                 }
 
@@ -97,12 +113,98 @@ namespace net
 
 
 
-
-
         }
 
 
     }
+
+    public class Taxi : TransportService
+    {
+
+        public override void BookService()
+        {
+            Console.WriteLine("Please enter your taxi pickup spot:");
+            PickupSpot = Console.ReadLine();
+            Console.WriteLine("Please enter your taxi destination:");
+            Destination = Console.ReadLine();
+            TotalCost = "$70";
+
+            Console.WriteLine($"Your taxi from {PickupSpot} to {Destination} has been qued");
+            Console.WriteLine($"Total cost being {TotalCost}");
+
+            Console.WriteLine("Do you confirm the order");
+            string Confirm = Console.ReadLine().ToLower();
+            if (Confirm == "yes" || Confirm == "y")
+            {
+                Console.WriteLine("---------CONFIRMED----------");
+            }
+            else
+            {
+                Console.WriteLine("-------ORDER NOT CONFIRMED---------");
+            }
+
+        }
+    }
+
+    public class Bus : TransportService
+    {
+
+        public override void BookService()
+        {
+            Console.WriteLine("Please enter your Bus pickup spot:");
+            PickupSpot = Console.ReadLine();
+            Console.WriteLine("Please enter your Bus destination:");
+            Destination = Console.ReadLine();
+            TotalCost = "$20";
+
+            Console.WriteLine($"Your Bus from {PickupSpot} to {Destination} has been qued");
+            Console.WriteLine($"Total cost being {TotalCost}");
+
+            Console.WriteLine("Do you confirm the order");
+            string Confirm = Console.ReadLine().ToLower();
+            if (Confirm == "yes" || Confirm == "y")
+            {
+                Console.WriteLine("---------CONFIRMED----------");
+            }
+            else
+            {
+                Console.WriteLine("-------ORDER NOT CONFIRMED---------");
+            }
+
+        }
+    }
+
+    public class Train : TransportService
+    {
+
+        public override void BookService()
+        {
+            Console.WriteLine("Please enter your Train pickup spot:");
+            PickupSpot = Console.ReadLine();
+            Console.WriteLine("Please enter your Train destination:");
+            Destination = Console.ReadLine();
+            TotalCost = "$10";
+
+            Console.WriteLine($"Your Train from {PickupSpot} to {Destination} has been qued");
+            Console.WriteLine($"Total cost being {TotalCost}");
+
+            Console.WriteLine("Do you confirm the order");
+            string Confirm = Console.ReadLine().ToLower();
+            if (Confirm == "yes" || Confirm == "y")
+            {
+                Console.WriteLine("---------CONFIRMED----------");
+            }
+            else
+            {
+                Console.WriteLine("-------ORDER NOT CONFIRMED---------");
+            }
+
+        }
+    }
+
+
+
+
 }
 
 
